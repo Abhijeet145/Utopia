@@ -16,7 +16,9 @@ import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
+import Trie from "./models/TrieNode.js";
 import { users, posts } from "./data/index.js";
+import {insertNode } from "./controllers/auth.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -65,5 +67,9 @@ mongoose
     /* ADD DATA ONE TIME */
     // User.insertMany(users);
     // Post.insertMany(posts);
+    // const rootNode = new Trie();
+    // rootNode.save();
+
+    // insertNode("Abhishek");
   })
   .catch((error) => console.log(`${error} did not connect`));

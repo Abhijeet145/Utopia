@@ -1,0 +1,12 @@
+);
+    // insertNode(root,"Abhishek");
+    // insertNode(root,"Ramu");
+    // insertNode(root,"Ramesh");
+    // insertNode(root,"Akash");
+    // insertNode(root,"Avinash");
+    // insertNode(root,"Rahul");
+    // insertNode(root,"Rakesh");
+    // insertNode(root,"Prince");
+    // insertNode(root,"Priyanshu");
+    // insertNode(root,"Vikas");
+    // insertNode(root,"Ramesh");

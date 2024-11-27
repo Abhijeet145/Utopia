@@ -65,69 +65,15 @@ export const addRemoveFriend = async (req, res) => {
 
 
 
-export const insertNode=async (req,res)=>{
-  try{
-    const name = req.body.name;
-    const node = await Trie.findById('root');
-
-    
-    while(name.length>0){
-      node.Children.forEach(async id =>{
-        const child = await Trie.findById(id)
-        const key = child.Value;
-        const commonPrefix = _findCommonPrefix(name,key);
-        if(commonPrefix.length>0){
-          if(commonPrefix === key){//if child node's value matches fully we move down the trie
-
-          }
-        }
-        // if (commonPrefix.length > 0) {
-          //                     foundChild = true;
-          
-          //                     if (commonPrefix === key) {
-          //                         // Move down the trie
-          //                         node = child;
-          //                         word = word.slice(commonPrefix.length);
-          //                     } else {
-          //                         // Split the current node
-          //                         const remainingKey = key.slice(commonPrefix.length);
-          //                         const remainingWord = word.slice(commonPrefix.length);
-          
-          //                         // Create new nodes
-          //                         const newChild = new CompressedTrieNode(remainingKey);
-          //                         newChild.children = child.children;
-          //                         newChild.isEndOfWord = child.isEndOfWord;
-          
-          //                         child.value = commonPrefix;
-          //                         child.children = new Map([[remainingKey, newChild]]);
-          //                         child.isEndOfWord = false;
-          
-          //                         if (remainingWord.length > 0) {
-          //                             child.children.set(
-          //                                 remainingWord,
-          //                                 new CompressedTrieNode(remainingWord)
-          //                             );
-          //                             child.children.get(remainingWord).isEndOfWord = true;
-          //                         } else {
-          //                             child.isEndOfWord = true;
-          //                         }
-          //                     }
-          //               
-      })
-    }
-  }catch(err){
-    res.status(404).json({ message: err.message });
-  }
-}
 
 
 //Get user names for auto complete
 export const getUserNames= async (req,res)=>{
   
-  
+    
   try {
     let name = req.body.name;
-
+    
     const friends = {
       "1": "abhi",
       "2": "rakesh",

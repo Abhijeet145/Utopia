@@ -2,14 +2,12 @@ import mongoose from "mongoose";
 
 const TrieSchema = new mongoose.Schema(
   {
-    NodeId:{
-        type:String,
-    },
     Value:{
         type:String,
     },
     IsEndOfWord:{
         type:Boolean,
+        default:false,
     },
     Children:{
         type : Array,

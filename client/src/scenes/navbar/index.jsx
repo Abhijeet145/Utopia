@@ -9,6 +9,10 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton,
 } from "@mui/material";
 import {
   Search,
@@ -27,6 +31,8 @@ import FlexBetween from "components/FlexBetween";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  const [suggestions,SetSuggestions] = useState([]);
+  const [isTyping,SetTyping] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -43,17 +49,22 @@ const Navbar = () => {
   const fullName = `${user.firstName} ${user.lastName}`;
 
   const token = useSelector(state=>state.token);
-
   const HandleEvent = async (name)=>{
+    
     if(name.length>=3){
       console.log('I was triggered');
       const response = await fetch(`http://localhost:3001/users`, {
-        method: "POST",
+        method: "GET",
         headers: { Authorization: `Bearer ${token}` },
-        body:JSON.stringify({"input":"name"})
       });
-      const suggestions = await response.json();
-      console.log(suggestions)
+      const temp = await response.json();
+      console.log(temp);
+      let sug=[];
+      for(let key in temp){
+        sug.push(temp[key]);
+      }
+      SetSuggestions(sug);
+      SetTyping(true);
     }
   }
   return (
@@ -81,12 +92,34 @@ const Navbar = () => {
             padding="0.1rem 1.5rem"
           >
             <InputBase placeholder="Search..." onChange={(event)=>{HandleEvent(event.target.value)}} />
+            
+            
             <IconButton>
               <Search />
             </IconButton>
           </FlexBetween>
+          
         )}
       </FlexBetween>
+      {isTyping && (
+              <>
+              
+              <List>
+                {suggestions.forEach(name=>{
+                  <div>
+                    name
+                  </div>
+                  // <ListItem disablePadding>
+                  // <ListItemButton>
+                  //   <ListItemText primary ={name} />
+                  // </ListItemButton>
+                  // </ListItem>
+                  })
+                }
+                </List>
+              </>
+                
+            )}
 
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
